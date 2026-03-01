@@ -217,15 +217,29 @@ $pageTitle = "Dashboard";
                           </span>
                         </td>
                         <td>
+                          
                           <?php
-                          $statusClass = match ($msg['status']) {
-                            'Delivered' => 'success',
-                            'Sent' => 'primary', 
-                            'Failed' => 'danger',
-                            'Low balance' => 'warning',
-                            default => 'secondary',
-                          };
-                          ?>
+switch ($msg['status']) {
+    case 'Delivered':
+        $statusClass = 'success';
+        break;
+
+    case 'Sent':
+        $statusClass = 'primary';
+        break;
+
+    case 'Failed':
+        $statusClass = 'danger';
+        break;
+
+    case 'Low balance':
+        $statusClass = 'warning';
+        break;
+
+    default:
+        $statusClass = 'secondary';
+}
+?>
                           <span class="badge bg-<?= $statusClass ?>"><?= htmlspecialchars($msg['status']) ?></span>
                         </td>
                         <td class="text-muted small"><?= date('M j, H:i', strtotime($msg['created_at'])) ?></td>
