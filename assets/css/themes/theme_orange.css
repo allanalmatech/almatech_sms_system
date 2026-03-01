@@ -1,0 +1,17 @@
+:root {
+  --primary: #ea580c;
+  --primary-light: #fb923c;
+  --sidebar-bg: #2e1608;
+  --card-bg: #ffffff;
+  --body-bg: #fff7ed;
+  --text-color: #f9e7de;
+}
+
+body { background: var(--body-bg); color: var(--text-color); }
+.sidebar { background: var(--sidebar-bg); }
+.nav-link.active { background: var(--primary-light); }
+.btn-primary { background: var(--primary); border-color: var(--primary); }
+.btn-primary:hover { background: var(--primary-light); border-color: var(--primary-light); }
+.h3 {
+    color: #ea580c;
+}

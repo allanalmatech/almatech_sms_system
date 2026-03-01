@@ -1,0 +1,103 @@
+In 🇺🇬 **Uganda**, all valid mobile numbers follow the **E.164 international format** and start with the country code:
+
+> **Uganda Country Code: +256**
+
+When dialing locally (inside Uganda), numbers start with **0**.
+When dialing internationally, remove the leading **0** and add **+256**.
+
+---
+
+# 📱 Major Mobile Networks in Uganda & Their Valid Number Prefixes
+
+## 🟡 **MTN Uganda**
+
+Common prefixes:
+
+* 077
+* 078
+* 076
+* 039 (MTN fixed wireless / corporate ranges)
+
+**Formats:**
+
+* Local: `077XXXXXXX`
+* International: `+25677XXXXXXX`
+
+Example:
+
+* 0771234567
+* +256771234567
+
+---
+
+## 🔵 **Airtel Uganda**
+
+Common prefixes:
+
+* 070
+* 075
+* 074
+* 020 (Airtel fixed lines)
+
+**Formats:**
+
+* Local: `070XXXXXXX`
+* International: `+25670XXXXXXX`
+
+Example:
+
+* 0701234567
+* +256701234567
+
+---
+
+## 🟢 **Africell Uganda** *(Operations ended in 2021 but numbers may still appear in records)*
+
+Old prefixes:
+
+* 079
+* 0783 (older range)
+
+Format:
+
+* 079XXXXXXX
+* +25679XXXXXXX
+
+---
+
+## 🟣 **Uganda Telecom (UTL)**
+
+Common prefixes:
+
+* 071
+* 041 (landlines in Kampala region)
+
+Format:
+
+* 071XXXXXXX
+* +25671XXXXXXX
+
+---
+
+# 📞 Uganda Landline Format
+
+Landlines follow:
+
+* Local: `041XXXXXXX`
+* International: `+25641XXXXXXX`
+
+# ✅ General Uganda Mobile Number Structure
+
+| Format Type            | Example       |
+| ---------------------- | ------------- |
+| Local Mobile           | 07XXXXXXXX    |
+| International Mobile   | +2567XXXXXXXX |
+| Local Landline         | 04XXXXXXXX    |
+| International Landline | +2564XXXXXXXX |
+
+✔ Total digits (mobile): **9 digits after the leading 0**
+✔ Total digits (international): **+256 + 9 digits**
+
+---
+
+
