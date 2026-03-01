@@ -1,0 +1,167 @@
+# =================================================================
+# AlmaTech SMS - Security & Access Control
+# =================================================================
+
+# Prevent directory browsing
+Options -Indexes
+
+# Block access to sensitive files and directories
+<FilesMatch "^(config|bootstrap|\.env|\.git|\.svn|\.hg|\.bzr|composer\.(json|lock)|package\.(json|lock)|yarn\.(lock)|npm\.(lock|debug\.log|error\.log)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Block access to configuration files
+<Files "config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "bootstrap.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Block access to database files
+<FilesMatch "\.(sql|sqlite|db|mdb)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Block access to backup files
+<FilesMatch "\.(bak|backup|old|tmp|log)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Block access to sensitive directories
+<FilesMatch "^includes/">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "^templates/">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "^database/">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow access to specific public assets
+<FilesMatch "\.(css|js|png|jpe?g|gif|svg|ico|woff2?|ttf|eot)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Prevent access to hidden files
+<FilesMatch "^\.">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Security headers
+<IfModule mod_headers.c>
+    # Prevent MIME type sniffing
+    Header always set X-Content-Type-Options nosniff
+    
+    # Enable XSS protection
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Prevent clickjacking
+    Header always set X-Frame-Options DENY
+    
+    # Enforce HTTPS (uncomment for production)
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    
+    # Content Security Policy
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data:; font-src 'self' https://cdn.jsdelivr.net"
+</IfModule>
+
+# PHP configuration
+<IfModule mod_php.c>
+    # Hide PHP version
+    php_flag expose_php off
+    
+    # Error handling
+    php_flag display_errors off
+    php_flag log_errors on
+    
+    # File upload limits
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 30
+    php_value memory_limit 256M
+    
+    # Session security
+    php_value session.cookie_httponly 1
+    php_value session.cookie_secure 1
+    php_value session.use_only_cookies 1
+</IfModule>
+
+# URL rewriting for clean URLs
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Security: Prevent HTTP methods
+    RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK|DEBUG)
+    RewriteRule .* - [F]
+    
+    # Security: Block suspicious user agents
+    RewriteCond %{HTTP_USER_AGENT} ^(nmap|nikto|wikto|sf|sqlmap|bsqlbf|w3af|acunetix|havij|appscan|nessus|netsparker|sqlninja|wpscan)
+    RewriteRule .* - [F,L]
+    
+    # Security: Block common exploit patterns
+    RewriteCond %{QUERY_STRING} (<|%3C).*script.*(|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} exec(|system|passthru|shell|cmd|eval|base64) [NC]
+    RewriteRule .* - [F,L]
+    
+    # Clean URLs (optional - uncomment if you want clean URLs)
+    # RewriteRule ^dashboard$ dashboard.php [L]
+    # RewriteRule ^login$ login.php [L]
+    # RewriteRule ^logout$ logout.php [L]
+</IfModule>
+
+# Error pages
+ErrorDocument 403 /error.php?code=403
+ErrorDocument 404 /error.php?code=404
+ErrorDocument 500 /error.php?code=500
+
+# Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+# Cache control for static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+</IfModule>
+
+# Prevent access to .htaccess itself
+<Files ".htaccess">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# =================================================================
+# END OF FILE
+# =================================================================

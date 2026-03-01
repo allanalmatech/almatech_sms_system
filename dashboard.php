@@ -218,12 +218,12 @@ $pageTitle = "Dashboard";
                         </td>
                         <td>
                           <?php
-                          $statusClass = match($msg['status']) {
+                          $statusClass = match ($msg['status']) {
                             'Delivered' => 'success',
                             'Sent' => 'primary', 
                             'Failed' => 'danger',
                             'Low balance' => 'warning',
-                            default => 'secondary'
+                            default => 'secondary',
                           };
                           ?>
                           <span class="badge bg-<?= $statusClass ?>"><?= htmlspecialchars($msg['status']) ?></span>
