@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             }
                             $stmt->close();
 
-                            $previewRecipients = implode(',', array_map(fn($r) => $r['phone'], array_slice($rows, 0, 5)));
+                            $previewRecipients = implode(',', array_map(function($r) { return $r['phone']; }, array_slice($rows, 0, 5)));
                             $statusLabel = $isScheduled ? 'Queued' : 'Sent';
                             $msgPreview = mb_substr($template, 0, 240, 'UTF-8');
                             $stmt = $db->prepare('INSERT INTO sms_logs (user_id, campaign_id, sender_id_text, recipients_preview, message_preview, sms_units, status_label, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())');

@@ -56,7 +56,7 @@ if (!function_exists('normalize_ug_phone')) {
         }
 
         $value = str_replace(['-', '(', ')'], '', $value);
-        if (str_starts_with($value, '+')) {
+        if (substr($value, 0, 1) === '+') {
             $value = '+' . preg_replace('/\D+/', '', substr($value, 1));
         } else {
             $value = preg_replace('/\D+/', '', $value);

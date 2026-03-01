@@ -16,7 +16,7 @@ if (!function_exists('enforce_maintenance_mode')) {
         }
 
         $path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?? '';
-        if (str_ends_with($path, '/maintenance.php')) {
+        if (substr($path, -strlen('/maintenance.php')) === '/maintenance.php') {
             return;
         }
 

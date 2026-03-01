@@ -9,7 +9,7 @@ $pathOnly = parse_url($current, PHP_URL_PATH) ?: $current;
 // Helper: active if current URL contains the href
 function is_active(string $href, string $pathOnly): bool {
   // normalize: if your app sits in subfolder, match by end segment
-  return $href !== '#' && str_contains($pathOnly, $href);
+  return $href !== '#' && strpos($pathOnly, $href) !== false;
 }
 
 // Define menu (groups + children)
